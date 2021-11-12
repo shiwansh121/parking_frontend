@@ -3,7 +3,7 @@ pipeline {
         registry = "lakshmi4025/parking_ui2"
         registrycredential = 'dockerhub'
         dockerImage = ''
-       agent none
+       agent any
         stages{
             stage('SCM Checkout'){
                 agent any
