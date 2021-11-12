@@ -3,9 +3,9 @@ pipeline {
         registry = "lakshmi4025/parking_ui2"
         registrycredential = 'dockerhub'
         dockerImage = ''
-       agent any
-        stages{
-            stage('SCM Checkout'){
+       agent none
+        stages {
+            stage('SCM Checkout') {
                 agent any
                steps{
                     git 'https://github.com/lakshmi4025/parking_frontend.git'
