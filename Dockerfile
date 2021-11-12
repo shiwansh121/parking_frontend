@@ -1,5 +1,5 @@
 ## FROM deepakaiden/apachetomcat
-FROM senthil123/dockertomcat
+FROM lakshmi4025/dockertomcat
 LABEL name="prabu"
 LABEL description="Use dockertomcat image as base image for custom tomcat deployment"
 USER root
