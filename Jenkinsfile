@@ -1,23 +1,52 @@
 pipeline {
-    agent any
+    environment {
+        registry = "lakshmi4025/parking_ui2"
+        registrycredential = 'dockerhub'
+        dockerImage = ''
+       agent none
         stages{
-            stage('Git Checkout'){
-                steps{
+            stage('SCM Checkout'){
+                agent any
+               steps{
                     git 'https://github.com/lakshmi4025/parking_frontend.git'
                 }
             }
             stage('Build') {
-                steps{
+                agent{
+                    docker { image 'node:12-alpine' }
+                }
+                steps {
                     sh 'npm install'
                     sh 'npm run build'
-                    sh 'npm audit fix'
+                
+                
                 }
             }
-            stage('Deploy'){
+            stage('Build Image') {
+                agent any
                 steps{
-                    sh 'cp -r $WORKSPACE/build /var/jenkins_home/workspace'
-                    sh 'curl -u admin:admin http://34.93.60.102/:8888/manager/reload?path=/build'
+                    script {
+                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    }
                 }
+            }
+            stage('Deploy') {
+                agent any
+                   steps{
+                    script {
+                        docker.withRegistry('',registrycredential ) {
+                            dockerImage.push()
+                        }
+                    }
+                   }
+            }
+            stage('removed unused docker image')
+            agent any
+            steps{
+                sh "docker rmi $registry:$BUILD_NUMBER"
+                
+                        
+                    
             }
             }
         }
