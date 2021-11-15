@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "lakshmi4025/parking_ui2"
+        registry = "shiwansh/parking_ui2"
         registrycredential = 'dockerhub'
         dockerImage = ''
     }
@@ -9,7 +9,7 @@ pipeline {
             stage('SCM Checkout') {
                 agent any
                steps{
-                    git 'https://github.com/lakshmi4025/parking_frontend.git'
+                    git 'https://github.com/shiwansh121/parking_frontend.git'
                 }
             }
             stage('Build') {
