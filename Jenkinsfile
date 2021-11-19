@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registry = "shiwansh/parking_ui2"
-        registrycredential = 'dockerhub'
+        registrycredential = 'shiva12345'
         dockerImage = ''
     }
        agent none
