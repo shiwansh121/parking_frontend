@@ -2,7 +2,7 @@ pipeline {
     environment {
         registry = "shiwansh/parking_ui2"
         registrycredential = 'shiva12345'
-     
+     docker Image = ''
     }
        agent none
         stages {
